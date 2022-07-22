@@ -22,8 +22,14 @@ router.post('/admin/login', async function (req, res) {
     return res.sendStatus(500);
   }
 
-  return res.sendStatus(201);
+  return res.status(200).send({
+    ...admin,
+  });
 });
+
+/**
+ * create resource
+ */
 
 router.post('/mahasiswa', async function (req, res) {
   const { npm, password, kelas, nama } = req.body;
