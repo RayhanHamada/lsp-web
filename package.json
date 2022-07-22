@@ -7,6 +7,7 @@
   "author": "Muhammad Rayhan Hamada Budiman <rayhanhamada1999@gmail.com>",
   "license": "MIT",
   "workspaces": [
-    "backend"
+    "backend",
+    "frontend"
   ]
 }
