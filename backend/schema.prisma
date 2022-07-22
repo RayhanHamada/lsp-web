@@ -1,0 +1,65 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Admin {
+    id Int @id @default(autoincrement())
+
+    email    String @db.VarChar(80)
+    nama     String @db.VarChar(80)
+    password String @db.VarChar(80)
+
+    @@map("admin")
+}
+
+model Mahasiswa {
+    id Int @id @default(autoincrement())
+
+    npm      String @db.VarChar(8)
+    password String @db.VarChar(80)
+    kelas    String @db.VarChar(10)
+    nama     String @db.VarChar(80)
+
+    jadwalKursuss JadwalKursus[]
+
+    @@map("mahasiswa")
+}
+
+model Kursus {
+    id Int @id @default(autoincrement())
+
+    namaKursus       String @map("nama_kursus")
+    keteranganKursus String @map("keterangan_kursus")
+    lamaKursus       Int    @map("lama_kursus")
+
+    jadwalKursuss JadwalKursus[]
+
+    @@map("kursus")
+}
+
+enum WaktuKursus {
+    senin
+    selasa
+    rabu
+    kamis
+    jumat
+    sabtu
+}
+
+model JadwalKursus {
+    id Int @id @default(autoincrement())
+
+    terverifikasi Boolean
+    waktu         DateTime @db.Date
+
+    idKursus Int    @map("id_kursus")
+    kursus   Kursus @relation(fields: [idKursus], references: [id])
+
+    idMahasiswa Int       @map("id_mahasiswa")
+    mahasiswa   Mahasiswa @relation(fields: [idMahasiswa], references: [id])
+}
