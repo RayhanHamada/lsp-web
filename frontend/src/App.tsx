@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminLogin from './pages/AdminLogin';
+import LandingPage from './pages/LandingPage';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <div className="App">{count}</div>;
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/adminlogin" element={<AdminLogin />} />
+      <Route path="/admindashboard" element={<AdminDashboard />} />
+    </Routes>
+  );
 }
 
 export default App;
